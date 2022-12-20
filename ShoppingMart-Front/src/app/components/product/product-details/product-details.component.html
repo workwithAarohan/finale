@@ -1,0 +1,52 @@
+<div class="container mt-4">
+    <div class="row justify-content-center ">
+        <mat-card class=" w-75">
+            <div class="row py-3" style="column-gap: 50px;">
+                <div class="col-md-5 p-3">
+                    <img src="/assets/images/product/{{product?.imageUrl}}" style="width: 85%;">
+                </div>
+                <div class="col-md-6">
+                    <mat-card-header>
+                        <mat-card-title>
+                            {{product?.name}}
+                        </mat-card-title>
+                        <mat-card-subtitle>
+                            Category: <a href="/category/products/{{product?.category.id}}" 
+                            >{{product?.category.title}}</a>
+                            
+                        </mat-card-subtitle>
+
+                         
+                    </mat-card-header>
+                    <mat-card-content>
+                        <h5 class="fw-bold">
+                            {{product?.quantity>0 ? "Available": "Not Available"}}
+                        </h5>
+                        <h4 class="product-quantity">In Stock: {{product?.quantity}} (Items)</h4>
+
+                        <p class="product-price">{{product?.price | currency: 'Rs.' }}</p>
+
+                        <p class="product-description">{{product?.description}}</p>
+
+                        <form [formGroup]="cartForm">
+    
+                            <input type="hidden" formControlName="user" [ngModel]="22">
+                            <input type="hidden" formControlName="product" [ngModel]=product?.id>
+    
+                            <mat-form-field appearance="fill">
+                                <mat-label>Quantity</mat-label>
+                                <input matInput formControlName="quantity" min="1" max="{{product?.quantity}}" type="number" placeholder="1" [ngModel]="1">
+                                <mat-hint>Only {{product?.quantity}} items left </mat-hint>
+                            </mat-form-field>
+    
+                            <mat-card-actions>
+                                <button mat-raised-button (click)="addToCart()">Add to Cart</button>
+                            </mat-card-actions>
+                        </form>
+                    </mat-card-content>
+
+                </div>
+            </div>
+        </mat-card>
+    </div>
+</div>

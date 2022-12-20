@@ -1,0 +1,50 @@
+<h1 mat-dialog-title>{{actionLabel}} Category Form</h1>
+
+<div mat-dialog-content>
+    <form [formGroup]="categoryForm" enctype="multipart/form-data">
+        <div class="row" style="column-gap: 20px">
+            <div class="col-md-6">
+                <mat-form-field appearance="outline">
+                    <mat-label>Title</mat-label>
+                    <input formControlName="title" matInput placeholder="Title" />
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                    <mat-label>Category</mat-label>
+                    <mat-select placeholder="Category" formControlName="parent_category_id" *ngIf="!isUpdate">
+                      <mat-option value="" selected="selected">Option</mat-option>
+                      <div *ngFor="let category of categories">
+                          <mat-option value="{{category.id}}">
+                            {{category.title}}
+                          </mat-option>
+                      </div>
+                    </mat-select>
+                    <mat-select placeholder="Category" formControlName="parent_category_id" *ngIf="isUpdate">
+                      <mat-option value="" selected="selected">Option</mat-option>
+                      <div *ngFor="let category of categories">
+                          <mat-option value="{{category.id}}" *ngIf="category.id==editData.parent_category_id">
+                            {{category.title}}
+                          </mat-option>
+                      </div>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="col-md-5">
+                <input type="file"
+                    id="imageUrl" style="display: none;" (change)="onSelectFile($event)" accept="image/*">
+                <label for="imageUrl" class="border p-3 mb-2" type="button">Category Image</label>
+                
+                <img [src]="imageUrl" alt="" height="200">
+            </div>
+        </div>
+        
+    </form>
+</div>
+
+<div mat-dialog-actions [align]="'end'">
+    <button mat-raised-button color="warn" mat-dialog-close>Close</button>
+    <button style="margin-left: 8px;" mat-raised-button color="primary" 
+    (click)="addCategory()"
+    [disabled]="categoryForm.invalid">{{actionBtn}}</button>
+</div>
+
+

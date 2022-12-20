@@ -1,0 +1,50 @@
+.example-card {
+    max-width: 400px;
+}
+  
+.example-header-image {
+    background-size: cover;
+}
+
+mat-card-title {
+    font-size: 15px;
+}
+
+.product-image {
+    height: 300px;
+}
+
+.product-card {
+    height: 500px;
+    position: relative;
+}
+
+.cart-button {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 8px;
+}
+
+.example-spacer {
+    flex: 1 1 auto;
+  }
+
+.category-image {
+    height: 120px;
+    width: 120px;
+    margin-right: auto;
+    margin-left: auto;
+    padding: 9px;
+}
+
+.category-card {
+    width: 180px;
+
+}
+
+.category-card mat-card-subtitle
+{
+    text-align: center;
+}

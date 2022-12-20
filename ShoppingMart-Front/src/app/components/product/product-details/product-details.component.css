@@ -1,0 +1,36 @@
+mat-card-subtitle {
+    font-size: 12px;
+}
+
+mat-card-subtitle a {
+    text-decoration: none;
+}
+
+mat-card-content .product-quantity {
+    font-size: 12px;
+    margin-top: -18px;
+}
+
+mat-card-content .product-price {
+    font-weight: bold;
+    font-size: 20px;
+    color: #3f0cf8;
+    margin-top: 20px;
+}
+
+mat-card-content .product-description {
+    font-size: 15px;
+    margin-top: 20px;
+}
+
+mat-card-actions button {
+    width: 60%;
+    margin-top: 30px;
+    background-color: #4215e4;
+    color: #fff;
+}
+
+mat-form-field {
+    width: 60%;
+    height: 70px;
+}

@@ -1,0 +1,91 @@
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <mat-card class="w-80">
+            <div class="row">
+                <div class="col-md-8">
+                    <mat-card-header>
+                        <mat-card-title>
+                            My Cart ({{cartCount}})
+                        </mat-card-title>
+                    </mat-card-header>
+
+                    <mat-card-content style="height: 360px; overflow-x: hidden;">
+                        <div class="row mb-2 mt-2" *ngFor="let cartItem of cartItems">
+                            <hr>
+                            <div class="col-md-2">
+                                <img src="/assets/images/product/{{cartItem.product?.imageUrl}}" alt="" class="product-image">
+                            </div>
+                            <div class="col ms-2">
+                                <mat-card-title>
+                                    {{cartItem.product?.name}}
+                                </mat-card-title>
+                                <mat-card-subtitle>
+                                    {{cartItem.product?.price | currency: 'Rs. '}}
+                                </mat-card-subtitle>
+                                <mat-card-actions [align]="'start'">
+                                    <button mat-button (click)="deleteCartItem(cartItem.id)">Remove</button>
+                                </mat-card-actions>
+                            </div>
+                            <div class="col-md-3">
+                                Quantity
+                            </div>
+                        </div>
+                    </mat-card-content>
+                    <div class="row px-3 mb-3 justify-content-space-between">
+                        <hr>
+                        <div class="col" >
+                            <button mat-raised-button color="primary" class="order-button">Place Order</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4" style="border-left: 1px solid lightgrey;">
+                    <mat-card-header>
+                        <mat-card-subtitle>
+                            Payment Details
+                        </mat-card-subtitle>
+                        
+                    </mat-card-header>
+                    <hr>
+                    <mat-card-content style="height: 360px; overflow-x: hidden;">
+                        <div class="row py-2">
+                            <div class="col">
+                                <table width="360px">
+                                    <tr>
+                                        <td width="65%">
+                                            <p *ngFor="let cartItem of cartItems">
+                                                {{cartItem.product?.name}} ({{cartItem.quantity}})
+                                            </p>
+                                        </td>
+                                        <td>
+                                            <p *ngFor="let cartItem of cartItems">
+                                                {{cartItem.product?.price | currency: 'Rs. '}}
+                                            </p>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </mat-card-content>
+                    
+                    <div class="row px-2">
+                        <hr>
+                        <div class="col">
+                            <table>
+                                <tr>
+                                    <td width="240px">
+                                        <b>Total: </b>
+                                    </td>
+                                    <td>
+                                        <b> </b> 
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+        </mat-card>
+    </div>
+</div>
