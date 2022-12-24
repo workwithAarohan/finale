@@ -15,7 +15,7 @@ import java.util.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "users")
-public abstract class User implements UserDetails
+public class User
 {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -38,12 +38,4 @@ public abstract class User implements UserDetails
         roles.add(role);
     }
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
-        for (Role role : roles) {
-            authorities.add(new SimpleGrantedAuthority(role.getRole()));
-        }
-        return authorities;
-    }
 }

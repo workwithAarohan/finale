@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { CustomerProductComponent } from './customer-product.component';
 import { RouterModule, Routes } from '@angular/router';
 import { MaterialModule } from 'src/app/material/material.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes = [
   {path: '', component: CustomerProductComponent}
@@ -13,7 +14,8 @@ const routes: Routes = [
   imports: [
     CommonModule,
     MaterialModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    ReactiveFormsModule
   ],
   exports: [
     CustomerProductComponent,

@@ -14,6 +14,7 @@ import { ProductService } from '../product.service';
 export class ProductDetailsComponent implements OnInit {
   cartForm: FormGroup;
   cartQuantity: number = 1;
+  cartCount: number;
 
   productId: number;
   product: Product;
@@ -55,6 +56,20 @@ export class ProductDetailsComponent implements OnInit {
     console.log(this.cartForm.value);
     this.cartService.addToCart(this.cartForm.value)
       .subscribe({
+        next: () => {
+          this.cartService.getAllCartsByUserId(22)
+          .subscribe({
+            next: (response) => {
+              response.map((cartItem) => {
+                this.cartCount += cartItem.quantity;
+                this.cartService.setCartCount(this.cartCount);
+              });
+            },
+            error: (err: HttpErrorResponse) => {
+              alert(err.message);
+            } 
+          });
+        },
         error: (err: HttpErrorResponse) => {
           alert(err.message);
         }

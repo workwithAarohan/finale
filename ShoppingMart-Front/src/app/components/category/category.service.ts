@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -15,11 +15,13 @@ export class CategoryService {
 
   categories = new BehaviorSubject<Category[]>([]);
 
-
+  requestHeader = new HttpHeaders(
+    {"No-Auth": "True"}
+  )
   constructor(private http: HttpClient) { }
 
   public getCategory(): Observable<Category[]> {
-    return this.http.get<Category[]>(`${this.apiServerUrl}/category`);
+    return this.http.get<Category[]>(`${this.apiServerUrl}/category/`);
   }
 
   // public getCategoryById(categoryId: number): Observable<Category> {
@@ -27,7 +29,7 @@ export class CategoryService {
   // }
 
   public getCategoryById(categoryId: number): void {
-    this.http.get<Category>(`${this.apiServerUrl}/category/find/${categoryId}`)
+    this.http.get<Category>(`${this.apiServerUrl}/category/${categoryId}`, {headers: this.requestHeader})
       .subscribe(category => this.category.next(category));
 
   }
@@ -41,17 +43,17 @@ export class CategoryService {
 
   public addCategory(formData: FormData): Observable<FormData>
   {
-    return this.http.post<FormData>(`${this.apiServerUrl}/category/add`, formData);
+    return this.http.post<FormData>(`${this.apiServerUrl}/category/admin`, formData);
   }
 
   public updateCategory(formData: FormData): Observable<FormData>
   {
-    return this.http.put<FormData>(`${this.apiServerUrl}/category/update`, formData);
+    return this.http.put<FormData>(`${this.apiServerUrl}/category/admin`, formData);
   }
 
   public deleteCategory(categoryId: number): Observable<void> 
   {
-    return this.http.delete<void>(`${this.apiServerUrl}/category/delete/${categoryId}`);
+    return this.http.delete<void>(`${this.apiServerUrl}/category/admin/${categoryId}`);
   }
    
 }

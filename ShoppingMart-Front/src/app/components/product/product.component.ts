@@ -81,19 +81,22 @@ export class ProductComponent implements OnInit{
   }
 
   deleteProduct(id: number): void {
-    this.productService.deleteProduct(id)
-      .subscribe({
-        next: () => {
-          this.getProducts();
-        },
-        error: (err: HttpErrorResponse) => {
-          alert(err.message);
-        }
-      })
+    if(confirm("Do you want to delete!") == true)
+    {
+      this.productService.deleteProduct(id)
+        .subscribe({
+          next: () => {
+            this.getProducts();
+          },
+          error: (err: HttpErrorResponse) => {
+            alert(err.message);
+          }
+        })
+    }
   }
 
   goToItemDetails(data: Product): void {
-    this.router.navigate(['details', data.id], {state: {data}, relativeTo: this.route}).then();
+    this.router.navigate(['product/details', data.id], {state: {data}}).then();
   }
 
   

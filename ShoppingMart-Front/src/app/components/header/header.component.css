@@ -10,3 +10,18 @@ mat-form-field {
     width: 300px;
     height: 65px;
 }
+
+.btn-cart {
+    position: relative;
+}
+
+span.badge {
+    position: absolute;
+    font-size: 13px;
+    font-weight: 200;
+    border-radius: 50%;
+    background-color: brown;
+    padding: 3px 5px;
+    top: 5px;
+    right: 2px;
+}

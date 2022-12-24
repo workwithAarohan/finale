@@ -64,4 +64,9 @@ public class CartService
     {
         cartRepository.deleteById(id);
     }
+
+    public Long getCartCount(Long user_id)
+    {
+        return cartRepository.getCartCount(user_id);
+    }
 }

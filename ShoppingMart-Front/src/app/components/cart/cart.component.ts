@@ -1,6 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
 import { Cart } from 'src/app/interface/cart.interface';
 import { CartService } from './cart.service';
 
@@ -15,6 +16,7 @@ export class CartComponent implements OnInit {
   cartItems: Cart[];
   cartCounterItems: Cart[];
   cartCount: number = 0;
+  totalPrice: number = 0;
 
   constructor(private readonly cartService: CartService, 
     private readonly route: ActivatedRoute) {}
@@ -30,7 +32,7 @@ export class CartComponent implements OnInit {
 
     setTimeout(() => {
       this.calCount();
-    }, 1000);
+    }, 100);
 
     
   }
@@ -48,20 +50,28 @@ export class CartComponent implements OnInit {
   }
 
   deleteCartItem(cartId): void {
-    this.cartService
+    if (confirm("Do you want to delete!") == true) {
+      this.cartService
       .deleteCart(cartId).subscribe({
         next: () => {
           this.getCartByUserId(this.userId);
+          setTimeout(() => {
+            this.calCount();
+          }, 100);
         },
         error: (err: HttpErrorResponse) => {
           alert(err.message);
         }
       });
+    }
+    
   }
 
   calCount(): void {
     this.cartItems.map((cartItem) => {
       this.cartCount += cartItem.quantity;
+      this.totalPrice += cartItem.product.price * this.cartCount;
     });
   }
+
 }

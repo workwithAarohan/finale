@@ -15,8 +15,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
-import javax.servlet.ServletContext;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -32,10 +30,8 @@ public class ProductController
     @Autowired
     private final CategoryService categoryService;
 
-    @Autowired
-    ServletContext context;
 
-    @GetMapping
+    @GetMapping()
     public ResponseEntity<List<Product>> getAllProducts()
     {
         List<Product> products = productService.getAllProducts();
@@ -55,7 +51,7 @@ public class ProductController
 //    }
 
 
-    @PostMapping("/add")
+    @PostMapping()
     public ResponseEntity<ProductDTO> addProduct(
             @RequestParam("file") MultipartFile file,
             @RequestParam("product") String product) throws JsonParseException, JsonMappingException, IOException {
@@ -88,7 +84,7 @@ public class ProductController
         return new ResponseEntity<ProductDTO>(dbProductDTO, HttpStatus.CREATED);
     }
 
-    @PutMapping("/update")
+    @PutMapping()
     public ResponseEntity<ProductDTO> updateProduct(
             @RequestParam("file") MultipartFile file,
             @RequestParam("product") String product) throws JsonParseException, JsonMappingException, IOException
@@ -128,14 +124,14 @@ public class ProductController
         return new ResponseEntity<>(products, HttpStatus.OK);
     }
 
-    @GetMapping("/find/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Product> getProductById(@PathVariable("id") Long id)
     {
         Product product = productService.findProductById(id);
         return new ResponseEntity<>(product, HttpStatus.OK);
     }
 
-    @DeleteMapping("delete/{id}")
+    @DeleteMapping("/{id}")
 
     public ResponseEntity<Product> deleteProductById(@PathVariable("id") Long id)
     {

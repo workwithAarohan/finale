@@ -9,7 +9,7 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
 
 const routes: Routes = [
   {path: '', component: ProductComponent},
-  {path: 'details/:id', component: ProductDetailsComponent}
+  // {path: 'details/:id', component: ProductDetailsComponent}
 ];
 
 @NgModule({

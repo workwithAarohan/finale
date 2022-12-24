@@ -28,7 +28,7 @@ public class CategoryController
     private final CategoryService categoryService;
 
 
-    @PostMapping()
+    @PostMapping("admin")
     public ResponseEntity<CategoryDTO> addCategory(
             @RequestParam("file") MultipartFile file,
             @RequestParam("category") String category) throws JsonParseException, JsonMappingException, IOException
@@ -64,7 +64,7 @@ public class CategoryController
         return new ResponseEntity<>(newCategory, HttpStatus.CREATED);
     }
 
-    @GetMapping
+    @GetMapping()
     public ResponseEntity<List<Category>> getAllCategory()
     {
         List<Category> categories = categoryService.getAllCategories();
@@ -78,7 +78,7 @@ public class CategoryController
         return new ResponseEntity<>(category, HttpStatus.OK);
     }
 
-    @PutMapping()
+    @PutMapping("admin")
     public ResponseEntity<CategoryDTO> updateCategory(
             @RequestParam("file") MultipartFile file,
             @RequestParam("category") String category) throws JsonParseException, JsonMappingException, IOException
@@ -111,7 +111,7 @@ public class CategoryController
         return new ResponseEntity<>(updatedCategory, HttpStatus.OK);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/admin/{id}")
     public ResponseEntity<Category> deleteEmployee(@PathVariable("id") Long id)
     {
         categoryService.deleteCategory(id);
@@ -124,4 +124,6 @@ public class CategoryController
         List<Category> categories = categoryService.getCategoryByParentId(id);
         return new ResponseEntity<>(categories, HttpStatus.OK);
     }
+
+
 }

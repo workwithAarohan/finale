@@ -98,15 +98,17 @@ export class CategoryProductComponent implements OnInit {
   }
 
   deleteProduct(id: number): void {
-    this.productService.deleteProduct(id)
-      .subscribe({
-        next: () => {
-          this.getProducts();
-        },
-        error: (err: HttpErrorResponse) => {
-          alert(err.message);
-        }
-      })
+    if(confirm("Do you want to delete!") == true) {
+      this.productService.deleteProduct(id)
+        .subscribe({
+          next: () => {
+            this.getProducts();
+          },
+          error: (err: HttpErrorResponse) => {
+            alert(err.message);
+          }
+        })
+    }
   }
 
   goToItemDetails(data: Product): void {

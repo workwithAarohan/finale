@@ -14,10 +14,10 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-@Configuration
-@EnableWebSecurity
+//@Configuration
+//@EnableWebSecurity
 
-public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter
+public class ApplicationSecurityConfig
 {
 //    @Autowired
 //    private UserRepository userRepository;
@@ -43,11 +43,5 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter
 //    }
 
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception
-    {
-        http.csrf().disable();
-        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-        http.authorizeRequests().anyRequest().permitAll();
-    }
+
 }

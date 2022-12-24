@@ -78,15 +78,18 @@ export class CategoryComponent implements OnInit {
   }
 
   deleteCategory(id: number): void {
-    this.categoryService.deleteCategory(id)
-      .subscribe({
-        next: () => {
-          this.getCategories();
-        },
-        error: (err: HttpErrorResponse) => {
-          alert(err.message);
-        }
-      })
+    if(confirm("Do you want to delete!") == true)
+    {
+      this.categoryService.deleteCategory(id)
+        .subscribe({
+          next: () => {
+            this.getCategories();
+          },
+          error: (err: HttpErrorResponse) => {
+            alert(err.message);
+          }
+        })
+    }
   }
 
   

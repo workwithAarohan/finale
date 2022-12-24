@@ -20,21 +20,21 @@ public class HomeController
     @Autowired
     private final HomeService homeService;
 
-    @GetMapping("categories")
+    @GetMapping("category/user/root")
     public ResponseEntity<List<Category>> getRootCategories()
     {
         List<Category> categories = homeService.getRootCategories();
         return new ResponseEntity<>(categories, HttpStatus.OK);
     }
 
-    @GetMapping("products")
+    @GetMapping("product/user/random")
     public ResponseEntity<List<Product>> getRandomProducts()
     {
         List<Product> products = homeService.getRandomProducts();
         return new ResponseEntity<>(products, HttpStatus.OK);
     }
 
-    @GetMapping("randomCategories")
+    @GetMapping("/category/user/randomCategories")
     public ResponseEntity<List<Category>> getRandomCategories()
     {
         List<Category> categories = homeService.getRandomCategories();
@@ -46,6 +46,13 @@ public class HomeController
     public ResponseEntity<List<Product>> getSearchedProducts(@RequestParam String productName)
     {
         List<Product> products = homeService.getSearchedProducts(productName);
+        return new ResponseEntity<>(products, HttpStatus.OK);
+    }
+
+    @GetMapping("/product/user/childCategories/{category_id}")
+    public ResponseEntity<List<Product>> getAllChildProducts(@PathVariable("category_id") Long category_id)
+    {
+        List<Product> products = homeService.getAllChildProducts(category_id);
         return new ResponseEntity<>(products, HttpStatus.OK);
     }
 }

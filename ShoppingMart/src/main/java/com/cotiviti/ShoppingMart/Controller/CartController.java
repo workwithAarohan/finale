@@ -37,4 +37,11 @@ public class CartController
         cartService.deleteCart(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @GetMapping("count/{user_id}")
+    public ResponseEntity<Long> getCartCount(@PathVariable("user_id") Long user_id)
+    {
+        Long count = cartService.getCartCount(user_id);
+        return new ResponseEntity<>(count, HttpStatus.OK);
+    }
 }

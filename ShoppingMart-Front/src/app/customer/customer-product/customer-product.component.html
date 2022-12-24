@@ -3,7 +3,7 @@
         <h3 class="fw-bold">{{category?.title}} Category</h3>
         <hr>
         <div class="d-flex mb-3">
-          <button mat-raised-button *ngIf="category.parentCategory != null" (click)="getProductByCategory(category.parentCategory?.id)">{{category.parentCategory?.title}}</button>
+          <button mat-raised-button *ngIf="category?.parentCategory != null" (click)="getProductByCategory(category.parentCategory?.id)">{{category.parentCategory?.title}}</button>
         </div>
       <div class="col-md-2">
         <h4 class="fw-bold" style="font-size: 14px;">Sub-Categories</h4>
@@ -26,7 +26,7 @@
                   <mat-card-header>
                     <img src="/assets/images/category/{{product.category?.imageUrl}}" alt="" mat-card-avatar>
                     <mat-card-title>
-                      <a href="/admin/product/details/{{product.id}}" style="text-decoration: none; font-size: 15px;">
+                      <a href="/product/details/{{product.id}}" style="text-decoration: none; font-size: 15px;">
                         {{product.name}}
                       </a>
                     </mat-card-title>
@@ -38,7 +38,15 @@
                       {{product.description}}
                     </p>
                   </mat-card-content>
-                    <button mat-button class="cart-button">Add to Cart</button>
+                    <form [formGroup]="cartForm">
+      
+                      <input type="hidden" formControlName="user" [ngModel]="22">
+                      <input type="hidden" formControlName="product" ngModel={{product.id}}>
+
+                      <mat-card-actions>
+                          <button mat-button class="cart-button" (click)="addToCart()">Add to Cart</button>
+                      </mat-card-actions>
+                    </form>
                 </mat-card>
             </div>
         </div>

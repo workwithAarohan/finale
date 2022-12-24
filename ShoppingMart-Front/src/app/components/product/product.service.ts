@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, first, Observable } from 'rxjs';
 import { Product } from 'src/app/interface/product.interface';
@@ -13,6 +13,10 @@ export class ProductService {
 
   product = new BehaviorSubject<Product[]>([]);
 
+  requestHeader = new HttpHeaders(
+    {"No-Auth": "True"}
+  )
+
   constructor(private readonly http: HttpClient) { }
 
   public getProduct(): Observable<Product[]> {
@@ -26,16 +30,12 @@ export class ProductService {
 
   public getProductByCategory(categoryId: number): void
   {
-      this.http.get<Product[]>(`${this.apiServerUrl}/product/${categoryId}`)
+      this.http.get<Product[]>(`${this.apiServerUrl}/product/${categoryId}`, {headers: this.requestHeader})
       .pipe(first()).subscribe(product => this.product.next(product));
 
-
   }
-
-  
-
   public getProductById(productId: number): Observable<Product> {
-    return this.http.get<Product>(`${this.apiServerUrl}/product/find/${productId}`);
+    return this.http.get<Product>(`${this.apiServerUrl}/product/find/${productId}`, {headers: this.requestHeader});
   }
 
   // public getProductById(productId: number): void {
@@ -45,16 +45,16 @@ export class ProductService {
 
   public addProduct(formData: FormData): Observable<FormData>
   {
-    return this.http.post<FormData>(`${this.apiServerUrl}/product/add`, formData);
+    return this.http.post<FormData>(`${this.apiServerUrl}/product`, formData);
   }
 
   public updateProduct(formData: FormData): Observable<FormData>
   {
-    return this.http.put<FormData>(`${this.apiServerUrl}/product/update`, formData);
+    return this.http.put<FormData>(`${this.apiServerUrl}/product`, formData);
   }
 
   public deleteProduct(productId: number): Observable<void> 
   {
-    return this.http.delete<void>(`${this.apiServerUrl}/product/delete/${productId}`);
+    return this.http.delete<void>(`${this.apiServerUrl}/product/${productId}`);
   }
 }

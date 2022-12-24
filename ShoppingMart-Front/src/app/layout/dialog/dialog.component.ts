@@ -103,6 +103,7 @@ export class DialogComponent implements OnInit {
       }
 
       const file = e.target.files[0];
+      console.log(file);
       this.categoryFile = file;
     }
   }

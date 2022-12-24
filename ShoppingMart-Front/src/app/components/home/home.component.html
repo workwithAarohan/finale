@@ -6,7 +6,12 @@
         <mat-card class="category-card">
               <img src="/assets/images/category/{{category.imageUrl}}" mat-card-image class="category-image">
             
-            <mat-card-subtitle>{{category.title}}</mat-card-subtitle>
+            <mat-card-subtitle>
+              <a href="/products/{{category.id}}" style="text-decoration: none;">
+                {{category.title}}
+              </a>
+            </mat-card-subtitle>
+            
         </mat-card>
       </div>
   </div>
@@ -19,7 +24,7 @@
           <mat-card-header>
             <img src="/assets/images/category/{{product.category?.imageUrl}}" alt="" mat-card-avatar>
             <mat-card-title>
-              <a href="/admin/product/details/{{product.id}}" style="text-decoration: none; font-size: 15px;">
+              <a href="/product/details/{{product.id}}" style="text-decoration: none; font-size: 15px;">
                 {{product.name}}
               </a>
             </mat-card-title>

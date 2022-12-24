@@ -1,55 +1,20 @@
 <mat-toolbar color="primary">
-  <span>Shopping Mart</span>
-  <button mat-button [matMenuTriggerFor]="animals">Category</button>
+  <button mat-button routerLink="/"><span style="font-size: 15px;">Shopping Mart</span></button>
 
-  <mat-menu #animals="matMenu">
+  
+  
+  <button mat-button [matMenuTriggerFor]="category" *ngIf="!loginService.roleMatch(['Admin'])">Category</button>
+  <mat-menu #category="matMenu">
 
     <div *ngFor="let category of categories">
-      <button mat-menu-item 
+      <button mat-menu-item
          (click)="getProductByCategory(category.id)"
       >
         {{category.title}}
       </button>
     </div>
-    <!-- <button mat-menu-item [matMenuTriggerFor]="invertebrates">Invertebrates</button> -->
   </mat-menu>
-  <!-- <mat-menu #vertebrates="matMenu">
-    <button mat-menu-item [matMenuTriggerFor]="fish">Fishes</button>
-    <button mat-menu-item [matMenuTriggerFor]="amphibians">Amphibians</button>
-    <button mat-menu-item [matMenuTriggerFor]="reptiles">Reptiles</button>
-    <button mat-menu-item>Birds</button>
-    <button mat-menu-item>Mammals</button>
-  </mat-menu>
-  <mat-menu #invertebrates="matMenu">
-    <button mat-menu-item>Insects</button>
-    <button mat-menu-item>Molluscs</button>
-    <button mat-menu-item>Crustaceans</button>
-    <button mat-menu-item>Corals</button>
-    <button mat-menu-item>Arachnids</button>
-    <button mat-menu-item>Velvet worms</button>
-    <button mat-menu-item>Horseshoe crabs</button>
-  </mat-menu>
-  <mat-menu #fish="matMenu">
-    <button mat-menu-item>Baikal oilfish</button>
-    <button mat-menu-item>Bala shark</button>
-    <button mat-menu-item>Ballan wrasse</button>
-    <button mat-menu-item>Bamboo shark</button>
-    <button mat-menu-item>Banded killifish</button>
-  </mat-menu>
-  <mat-menu #amphibians="matMenu">
-    <button mat-menu-item>Sonoran desert toad</button>
-    <button mat-menu-item>Western toad</button>
-    <button mat-menu-item>Arroyo toad</button>
-    <button mat-menu-item>Yosemite toad</button>
-  </mat-menu>
-  <mat-menu #reptiles="matMenu"> -->
-    <!-- <button mat-menu-item>Banded Day Gecko</button>
-    <button mat-menu-item>Banded Gila Monster</button>
-    <button mat-menu-item>Black Tree Monitor</button>
-    <button mat-menu-item>Blue Spiny Lizard</button>
-    <button mat-menu-item disabled>Velociraptor</button>
-  </mat-menu> -->
-  <button mat-button [matMenuTriggerFor]="menu">Menu</button>
+  <button mat-button [matMenuTriggerFor]="menu" *ngIf="loginService.roleMatch(['Admin'])">Menu</button>
   <mat-menu #menu="matMenu">
     <button mat-menu-item routerLink="/">Home</button>
     <button mat-menu-item routerLink="/admin/category">Category</button>
@@ -57,21 +22,19 @@
   </mat-menu>
 
   <span class="spacer"></span>
- 
-  <form [formGroup]="searchForm">
-    <mat-form-field>
-      <input type="text" matInput placeholder="Search" formControlName="productName">
-    </mat-form-field>
-    <button mat-icon-button style="margin-top: 20px;" aria-label="search" (click)="searchProduct()">
-      <mat-icon>search</mat-icon>
-    </button>
-  </form>
+  <button mat-icon-button aria-label="shopping_cart"
+   class="btn-cart" routerLink="/cart/22"
+   *ngIf="loginService.roleMatch(['User'])">
+    <mat-icon >shopping_cart</mat-icon>
+    <span class="badge" *ngIf="cartCount > 0">{{cartCount}}</span>
+  </button>
 
-  <span class="spacer"></span>
-  <button mat-icon-button aria-label="shopping_cart" routerLink="/cart/22">
-    <mat-icon>shopping_cart</mat-icon>
-  </button>
-  <button mat-icon-button aria-label="login">
+  <h4 class="mt-3" *ngIf="isLoggedIn()">{{userAuthService.getUser()}}</h4>
+
+  <button *ngIf="!isLoggedIn()" mat-icon-button aria-label="login" class="ms-4" routerLink="/login">
     <mat-icon>login</mat-icon>
-  </button>
+  </button> 
+  <button *ngIf="isLoggedIn()" mat-icon-button aria-label="logout" class="ms-4" (click)="logout()">
+    <mat-icon>logout</mat-icon>
+  </button> 
 </mat-toolbar>

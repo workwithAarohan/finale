@@ -9,7 +9,6 @@ import { CategoryProductComponent } from '../category-product/category-product.c
 
 const routes: Routes = [
   { path: '', component: CategoryComponent },
-  { path: 'products/:id', component: CategoryProductComponent}
 ];
 
 @NgModule({

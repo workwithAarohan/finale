@@ -40,4 +40,10 @@ public class HomeService
     {
         return productRepository.getSearchedProducts(productName);
     }
+
+    public List<Product> getAllChildProducts(Long category_id)
+    {
+        return productRepository.getAllChildProducts(category_id);
+    }
+
 }

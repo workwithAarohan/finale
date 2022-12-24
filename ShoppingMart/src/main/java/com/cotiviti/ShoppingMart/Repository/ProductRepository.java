@@ -22,4 +22,7 @@ public interface ProductRepository extends JpaRepository<Product, Long>
 
     @Query(nativeQuery = true, value = "SELECT * FROM Product WHERE name LIKE %:productName%")
     List<Product> getSearchedProducts(@Param("productName") String productName);
+
+    @Query(nativeQuery = true, value ="SELECT * FROM Product WHERE category_id IN (SELECT id FROM Category WHERE parent_category_id = :parentCategoryId || category_id = :parentCategoryId)")
+    List<Product> getAllChildProducts(@Param("parentCategoryId") Long category_id);
 }
