@@ -1,5 +1,6 @@
 package com.cotiviti.ShoppingMart.Controller;
 
+import com.cotiviti.ShoppingMart.DTO.UserDTO;
 import com.cotiviti.ShoppingMart.Model.JwtRequest;
 import com.cotiviti.ShoppingMart.Model.JwtResponse;
 import com.cotiviti.ShoppingMart.Model.User;
@@ -8,6 +9,7 @@ import com.cotiviti.ShoppingMart.Service.UserService;
 import com.cotiviti.ShoppingMart.Utility.JwtUtility;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -71,7 +73,11 @@ public class UserController
 
         User user = userRepository.findByUserName(jwtRequest.getUsername());
 
-        return new JwtResponse(token, user);
+        UserDTO userDTO = new UserDTO();
+
+        BeanUtils.copyProperties(user, userDTO);
+
+        return new JwtResponse(token, userDTO);
     }
 
 

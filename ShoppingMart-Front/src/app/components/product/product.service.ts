@@ -30,12 +30,12 @@ export class ProductService {
 
   public getProductByCategory(categoryId: number): void
   {
-      this.http.get<Product[]>(`${this.apiServerUrl}/product/${categoryId}`, {headers: this.requestHeader})
+      this.http.get<Product[]>(`${this.apiServerUrl}/product/category/${categoryId}`, {headers: this.requestHeader})
       .pipe(first()).subscribe(product => this.product.next(product));
 
   }
   public getProductById(productId: number): Observable<Product> {
-    return this.http.get<Product>(`${this.apiServerUrl}/product/find/${productId}`, {headers: this.requestHeader});
+    return this.http.get<Product>(`${this.apiServerUrl}/product/${productId}`, {headers: this.requestHeader});
   }
 
   // public getProductById(productId: number): void {

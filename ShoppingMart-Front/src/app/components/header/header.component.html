@@ -29,7 +29,7 @@
     <span class="badge" *ngIf="cartCount > 0">{{cartCount}}</span>
   </button>
 
-  <h4 class="mt-3" *ngIf="isLoggedIn()">{{userAuthService.getUser()}}</h4>
+  <h4 class="mt-3" *ngIf="isLoggedIn()">{{userAuthService.getUserName()}}</h4>
 
   <button *ngIf="!isLoggedIn()" mat-icon-button aria-label="login" class="ms-4" routerLink="/login">
     <mat-icon>login</mat-icon>

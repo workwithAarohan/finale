@@ -1,5 +1,12 @@
 import { Injectable } from '@angular/core';
 
+export interface UserDetails {
+  id: number;
+  firstName: string;
+  lastName: string;
+  userName: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -23,12 +30,20 @@ export class UserAuthService {
     return localStorage.getItem("token");
   }
 
-  public setUser(username: string) {
-    localStorage.setItem("userName", username);
+  public setUserName(userName) {
+    localStorage.setItem("userName", userName);
   }
 
-  public getUser(): string {
+  public getUserName(): string {
     return localStorage.getItem("userName");
+  }
+
+  public setUserId(userId: number) {
+    localStorage.setItem("userId", JSON.stringify(userId));
+  }
+
+  public getUserId(): string {
+    return localStorage.getItem("userId");
   }
 
   public clear() { 

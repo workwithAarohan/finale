@@ -31,12 +31,12 @@
             <mat-card-subtitle>{{product.category?.title}}</mat-card-subtitle>
           </mat-card-header>
           <img mat-card-image src="/assets/images/product/{{product.imageUrl}}" alt="Photo of a product" class="px-2 product-image">
-          <mat-card-content>
+          <mat-card-content class="mt-2">
             <p>
               {{product.description}}
             </p>
           </mat-card-content>
-            <button mat-button class="cart-button">Add to Cart</button>
+            <button mat-button class="cart-button" *ngIf="!isLoggedIn()">Add to Cart</button>
         </mat-card>
       </div>
       

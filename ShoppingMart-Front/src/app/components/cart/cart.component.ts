@@ -1,8 +1,10 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { Cart } from 'src/app/interface/cart.interface';
+import { OrderDialogComponent } from 'src/app/layout/order-dialog/order-dialog.component';
 import { CartService } from './cart.service';
 
 @Component({
@@ -19,7 +21,8 @@ export class CartComponent implements OnInit {
   totalPrice: number = 0;
 
   constructor(private readonly cartService: CartService, 
-    private readonly route: ActivatedRoute) {}
+    private readonly route: ActivatedRoute,
+    private dialog: MatDialog,) {}
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('user_id');
@@ -36,6 +39,16 @@ export class CartComponent implements OnInit {
 
     
   }
+
+  openDialog() {
+    this.dialog.open(OrderDialogComponent, {
+      width: '70%'
+    }).afterClosed().subscribe(val => {
+      if(val == 'save') {
+        alert("ok");
+      }
+    }); 
+  } 
 
   getCartByUserId(userId): void {
     this.cartService.getAllCartsByUserId(userId)

@@ -20,6 +20,7 @@ import { LoginService } from './login/login.service';
 import { ProductDetailsComponent } from './components/product/product-details/product-details.component';
 import { AdminComponent } from './dashboard/admin/admin.component';
 import { UserComponent } from './dashboard/user/user.component';
+import { OrderDialogComponent } from './layout/order-dialog/order-dialog.component';
 
 @NgModule({
   declarations: [

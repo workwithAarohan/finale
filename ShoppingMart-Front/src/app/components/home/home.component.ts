@@ -2,6 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Category } from 'src/app/interface/category.interface';
 import { Product } from 'src/app/interface/product.interface';
+import { UserAuthService } from 'src/app/services/user-auth.service';
 import { CategoryService } from '../category/category.service';
 import { HomeService } from './home.service';
 
@@ -15,11 +16,16 @@ export class HomeComponent implements OnInit, OnDestroy{
   public products: Product[];
 
   constructor(private readonly homeService: HomeService,
-    private readonly categoryService: CategoryService) {}
+    private readonly categoryService: CategoryService,
+    public userAuthService: UserAuthService) {}
 
   ngOnInit(): void {
       this.getCategories();
       this.getProducts();
+  }
+
+  isLoggedIn() {
+    return this.userAuthService.isLoggedIn();
   }
 
   public getCategories(): void {

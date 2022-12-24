@@ -117,7 +117,7 @@ public class ProductController
         return new ResponseEntity<ProductDTO>(dbProductDTO, HttpStatus.OK);
     }
 
-    @GetMapping("/{cat_id}")
+    @GetMapping("/category/{cat_id}")
     public ResponseEntity<List<Product>> getProductByCategoryId(@PathVariable("cat_id") Long cat_id)
     {
         List<Product> products = productService.getProductByCategoryId(cat_id);
