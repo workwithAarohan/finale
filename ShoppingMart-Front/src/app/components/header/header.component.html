@@ -16,17 +16,16 @@
   </mat-menu>
   <button mat-button [matMenuTriggerFor]="menu" *ngIf="loginService.roleMatch(['Admin'])">Menu</button>
   <mat-menu #menu="matMenu">
-    <button mat-menu-item routerLink="/">Home</button>
     <button mat-menu-item routerLink="/admin/category">Category</button>
     <button mat-menu-item routerLink="/admin/product">Product</button>
   </mat-menu>
 
   <span class="spacer"></span>
   <button mat-icon-button aria-label="shopping_cart"
-   class="btn-cart" routerLink="/cart/22"
+   class="btn-cart" routerLink="/cart/{{userAuthService.getUserId()}}"
    *ngIf="loginService.roleMatch(['User'])">
     <mat-icon >shopping_cart</mat-icon>
-    <span class="badge" *ngIf="cartCount > 0">{{cartCount}}</span>
+    <!-- <span class="badge">{{cartCount}}</span> -->
   </button>
 
   <h4 class="mt-3" *ngIf="isLoggedIn()">{{userAuthService.getUserName()}}</h4>

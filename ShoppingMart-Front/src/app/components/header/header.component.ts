@@ -20,7 +20,7 @@ export class HeaderComponent  implements OnInit{
 
   public categories: Category[];
   searchForm: FormGroup;
-  userId: number = 22;
+  userId: number = +this.userAuthService.getUserId();
   public products: Product[];
   cartCount: number;
 
@@ -34,11 +34,7 @@ export class HeaderComponent  implements OnInit{
     private readonly cartService: CartService,
     public userAuthService: UserAuthService,
     public loginService: LoginService) {
-      this.cartService.count.subscribe({
-        next: response => {
-          this.cartCount = response;
-        }
-      })
+      
     }
 
 
@@ -47,11 +43,18 @@ export class HeaderComponent  implements OnInit{
       'productName': ['', Validators.required] 
     });
 
+    this.cartService.getCartCount(+this.userAuthService.getUserId());
+    this.cartService.count.subscribe({
+      next: response => {
+        this.cartCount = response;
+      }
+    })
+
     this.getCategories();
 
     const userId = this.route.snapshot.paramMap.get("id");
     if(userId) {
-      this.userId = 22;
+      this.userId = +userId;
     }
 
     // setTimeout(()=> {

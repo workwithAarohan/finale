@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from 'src/app/interface/product.interface';
+import { LoginService } from 'src/app/login/login.service';
+import { UserAuthService } from 'src/app/services/user-auth.service';
 import { CartService } from '../../cart/cart.service';
 import { ProductService } from '../product.service';
 
@@ -22,7 +24,9 @@ export class ProductDetailsComponent implements OnInit {
   constructor(private readonly route: ActivatedRoute,
     private readonly productService: ProductService,
     private readonly formBuilder: FormBuilder,
-    private readonly cartService: CartService) {}
+    private readonly cartService: CartService,
+    public loginService: LoginService,
+    public userAuthService: UserAuthService) {}
 
   ngOnInit(): void {
     this.cartForm = this.formBuilder.group({

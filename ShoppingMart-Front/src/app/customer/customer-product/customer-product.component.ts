@@ -9,6 +9,8 @@ import { HomeService } from 'src/app/components/home/home.service';
 import { ProductService } from 'src/app/components/product/product.service';
 import { Category } from 'src/app/interface/category.interface';
 import { Product } from 'src/app/interface/product.interface';
+import { LoginService } from 'src/app/login/login.service';
+import { UserAuthService } from 'src/app/services/user-auth.service';
 
 @Component({
   selector: 'app-customer-product',
@@ -30,7 +32,9 @@ export class CustomerProductComponent {
     private readonly router: Router,
     private readonly homeService: HomeService,
     private formBuilder: FormBuilder,
-    private cartService: CartService) {}
+    private cartService: CartService,
+    public loginService: LoginService,
+    public userAuthService: UserAuthService) {}
 
   ngOnInit(): void {
 

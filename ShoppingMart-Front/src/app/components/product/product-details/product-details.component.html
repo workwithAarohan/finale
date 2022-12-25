@@ -30,7 +30,7 @@
 
                         <form [formGroup]="cartForm">
     
-                            <input type="hidden" formControlName="user" [ngModel]="22">
+                            <input type="hidden" formControlName="user" [ngModel]="userAuthService.getUserId()">
                             <input type="hidden" formControlName="product" [ngModel]=product?.id>
     
                             <mat-form-field appearance="fill">
@@ -39,7 +39,7 @@
                                 <mat-hint>Only {{product?.quantity}} items left </mat-hint>
                             </mat-form-field>
     
-                            <mat-card-actions>
+                            <mat-card-actions *ngIf="loginService.roleMatch(['User'])">
                                 <button mat-raised-button (click)="addToCart()">Add to Cart</button>
                             </mat-card-actions>
                         </form>

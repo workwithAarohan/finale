@@ -17,12 +17,12 @@ export class CartComponent implements OnInit {
   userId: number;
   cartItems: Cart[];
   cartCounterItems: Cart[];
-  cartCount: number = 0;
-  totalPrice: number = 0;
+  cartCount: number ;
+  totalPrice: number;
 
   constructor(private readonly cartService: CartService, 
     private readonly route: ActivatedRoute,
-    private dialog: MatDialog,) {}
+    private dialog: MatDialog) {}
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('user_id');
@@ -45,7 +45,7 @@ export class CartComponent implements OnInit {
       width: '70%'
     }).afterClosed().subscribe(val => {
       if(val == 'save') {
-        alert("ok");
+        alert("ok")
       }
     }); 
   } 
@@ -55,6 +55,9 @@ export class CartComponent implements OnInit {
       .subscribe({
         next: (response) => {
           this.cartItems = response;
+          setTimeout(() => {
+            this.calCount();
+          }, 100);
         },
         error: (err: HttpErrorResponse) => {
           alert(err.message);
@@ -68,9 +71,6 @@ export class CartComponent implements OnInit {
       .deleteCart(cartId).subscribe({
         next: () => {
           this.getCartByUserId(this.userId);
-          setTimeout(() => {
-            this.calCount();
-          }, 100);
         },
         error: (err: HttpErrorResponse) => {
           alert(err.message);
@@ -81,6 +81,8 @@ export class CartComponent implements OnInit {
   }
 
   calCount(): void {
+    this.totalPrice = 0;
+    this.cartCount = 0;
     this.cartItems.map((cartItem) => {
       this.cartCount += cartItem.quantity;
       this.totalPrice += cartItem.product.price * this.cartCount;

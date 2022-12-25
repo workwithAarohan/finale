@@ -42,8 +42,8 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['/user/dashboard']);
         }
       },
-      error: (err: HttpErrorResponse) => {
-        console.log(err.message);
+      error: () => {
+        alert("Invalid");
       }
     })
   }
