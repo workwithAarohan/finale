@@ -35,7 +35,7 @@ export class CategoryService {
   }
 
   public getChildCategories(categoryId: number): void {
-    this.http.get<Category[]>(`${this.apiServerUrl}/category/childCategories/${categoryId}`)
+    this.http.get<Category[]>(`${this.apiServerUrl}/category/childCategories/${categoryId}` , {headers: this.requestHeader})
       .subscribe(categories => this.categories.next(categories));
   }
 

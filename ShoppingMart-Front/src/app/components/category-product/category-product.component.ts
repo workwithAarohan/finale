@@ -112,6 +112,6 @@ export class CategoryProductComponent implements OnInit {
   }
 
   goToItemDetails(data: Product): void {
-    this.router.navigate(['/admin/product/details', data.id], {state: {data}}).then();
+    this.router.navigate(['product/details', data.id], {state: {data}}).then();
   }
 }
