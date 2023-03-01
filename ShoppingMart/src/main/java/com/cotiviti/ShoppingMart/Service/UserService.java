@@ -79,8 +79,8 @@ public class UserService implements UserDetailsService
         user.setPassword(decodedPassword);
         Role role = roleRepository.findRoleByRoleCode("User");
 //      role.UserRole(user);
-      user.UserRole(role);
-      return userRepository.save(user);
+        user.UserRole(role);
+        return userRepository.save(user);
     }
 
     public List<User> getAllUsers()

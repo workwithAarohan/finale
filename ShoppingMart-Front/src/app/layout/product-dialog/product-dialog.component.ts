@@ -60,16 +60,20 @@ export class ProductDialogComponent implements OnInit {
       this.productForm.controls['price'].setValue(this.editData.price);
       this.productForm.controls['quantity'].setValue(this.editData.quantity);
       this.productForm.controls['description'].setValue(this.editData.description);
-      // this.productForm.controls['imageUrl'].setValue(this.editData.imageUrl);
+      this.productForm.controls['imageUrl'].setValue(this.editData.imageUrl);
       this.productForm.controls['category_id'].setValue(this.editData.category_id?.id);
+      this.imageUrl = '/assets/images/product/' + this.editData.imageUrl;
+
     }
   }
 
   addProduct(): void {
     const product = this.productForm.value;
+    console.log(product);
     const formData = new FormData();
     formData.append('product', JSON.stringify(product));
     formData.append('file', this.productFile);
+    console.log(formData);
     if(!this.editData){
       this.productService
         .addProduct(formData)

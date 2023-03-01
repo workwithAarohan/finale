@@ -54,6 +54,7 @@ export class DialogComponent implements OnInit {
         this.categoryForm.controls['title'].setValue(this.editData.title);
         this.categoryForm.controls['id'].setValue(this.editData.id);
         this.categoryForm.controls['parent_category_id'].setValue(this.editData.parent_category_id);
+        this.imageUrl = '/assets/images/category/' + this.editData.imageUrl;
       }
   }
 
@@ -62,6 +63,7 @@ export class DialogComponent implements OnInit {
     const formData = new FormData();
     formData.append('category', JSON.stringify(category));
     formData.append('file', this.categoryFile);
+    console.log(formData);
     if(!this.editData) {
       this.categoryService
         .addCategory(formData)

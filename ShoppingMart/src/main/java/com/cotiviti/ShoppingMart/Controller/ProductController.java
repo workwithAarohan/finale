@@ -89,29 +89,33 @@ public class ProductController
             @RequestParam("file") MultipartFile file,
             @RequestParam("product") String product) throws JsonParseException, JsonMappingException, IOException
     {
-        String path = "D:/Project/Final_Project/ShoppingMart-Front/src/assets/images/product/";
+
         ProductDTO productDTO = new ObjectMapper().readValue(product, ProductDTO.class);
-        boolean isExist = new File(path).exists();
-        if(!isExist)
+        if(file!=null)
         {
-            new File(path).mkdir();
+            String path = "D:/Project/Final_Project/ShoppingMart-Front/src/assets/images/product/";
+            boolean isExist = new File(path).exists();
+            if(!isExist)
+            {
+                new File(path).mkdir();
+            }
+
+            String filename = file.getOriginalFilename();
+            String newFilename = FilenameUtils.getBaseName(filename)
+                    + "_" + System.currentTimeMillis()
+                    + "." + FilenameUtils.getExtension(filename);
+
+            File serverFile = new File(path + File.separator + newFilename);
+
+            try
+            {
+                FileUtils.writeByteArrayToFile(serverFile, file.getBytes());
+            }catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            productDTO.setImageUrl(newFilename);
         }
-
-        String filename = file.getOriginalFilename();
-        String newFilename = FilenameUtils.getBaseName(filename)
-                + "_" + System.currentTimeMillis()
-                + "." + FilenameUtils.getExtension(filename);
-
-        File serverFile = new File(path + File.separator + newFilename);
-
-        try
-        {
-            FileUtils.writeByteArrayToFile(serverFile, file.getBytes());
-        }catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        productDTO.setImageUrl(newFilename);
 
         ProductDTO dbProductDTO = productService.updateProduct(productDTO);
         return new ResponseEntity<ProductDTO>(dbProductDTO, HttpStatus.OK);

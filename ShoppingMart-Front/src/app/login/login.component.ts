@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -16,7 +17,8 @@ export class LoginComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
     private readonly loginService: LoginService,
     private readonly userAuthService: UserAuthService,
-    private readonly router: Router) {}
+    private readonly router: Router, 
+    private location: Location) {}
 
   ngOnInit(): void {
 
@@ -40,15 +42,16 @@ export class LoginComponent implements OnInit {
 
         const role = response.user.roles[0].role;
         if(role === 'Admin') {
-          this.router.navigate(['/admin/dashboard']);
+          // this.router.navigate(["/.."]);
+          this.location.back();
         }
         else if(role === 'User') {
-          this.router.navigate(['/user/dashboard']);
+          this.location.back();
         }
       },
       error: () => {
         alert("Invalid");
       }
-    })
+    }) 
   }
 }

@@ -45,11 +45,13 @@ export class ProductService {
 
   public addProduct(formData: FormData): Observable<FormData>
   {
+    console.log(formData);
     return this.http.post<FormData>(`${this.apiServerUrl}/product`, formData);
   }
 
   public updateProduct(formData: FormData): Observable<FormData>
   {
+    console.log(formData);
     return this.http.put<FormData>(`${this.apiServerUrl}/product`, formData);
   }
 
